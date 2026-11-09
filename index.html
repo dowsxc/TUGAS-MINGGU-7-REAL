@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KetemuKampus - Portal Lost & Found Kampus untuk menemukan barang hilang">
+  <title>KetemuKampus - Portal Lost & Found Kampus</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Komponen 1: Header/Navbar -->
+  <header class="header" id="header">
+    <nav class="navbar container">
+      <div class="logo">
+        <div class="logo-badge">K</div>
+        <span class="logo-text">KetemuKampus</span>
+      </div>
+      
+      <!-- Toggle button untuk mobile -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      
+      <!-- Menu navigasi -->
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#beranda" class="nav-link">Beranda</a></li>
+        <li><a href="#katalog" class="nav-link">Katalog</a></li>
+        <li><a href="#cara-kerja" class="nav-link">Cara Kerja</a></li>
+        <li>
+          <button class="btn btn-primary" id="btnLapor">
+            + Lapor Barang
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Komponen 2: Hero Section -->
+    <section class="hero" id="beranda">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="badge">Portal Lost & Found Kampus</span>
+          <h1 class="hero-title">Barang tercecer? Kita temukan.</h1>
+          <p class="hero-desc">
+            Laporkan barang hilang atau temukan milik teman kampus. 
+            Sistem PIN menjaga keamanan setiap laporan.
+          </p>
+          
+          <!-- Search bar -->
+          <form class="search-form" id="searchForm">
+            <div class="search-wrapper">
+              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+              <input 
+                type="search" 
+                id="searchInput" 
+                placeholder="Cari barang..." 
+                aria-label="Cari barang"
+                class="search-input"
+              >
+            </div>
+            <button type="submit" class="btn btn-primary">Cari</button>
+          </form>
+          
+          <div class="hero-stats">
+            <span class="stat-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              Dilindungi PIN
+            </span>
+            <span class="stat-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+              <span id="itemCount">4</span> barang terdaftar
+            </span>
+          </div>
+        </div>
+        
+        <div class="hero-visual">
+          <div class="hero-card">
+            <div class="card-preview">
+              <span class="status-badge status-amber">Disimpan Penemu</span>
+              <h4>Headset Hitam</h4>
+              <p>Lab 1 • Hari ini</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Komponen 3: Kartu Produk (Catalog) -->
+    <section class="catalog" id="katalog">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Temukan barangmu</h2>
+          <button class="btn btn-primary" id="btnBuatLaporan">Buat laporan</button>
+        </div>
+        
+        <!-- Filter panel -->
+        <div class="filter-panel">
+          <div class="filter-grid">
+            <div class="filter-item">
+              <label for="filterKategori">Kategori</label>
+              <select id="filterKategori" class="filter-select">
+                <option value="semua">Semua</option>
+                <option value="ditemukan">Barang Ditemukan</option>
+                <option value="hilang">Barang Hilang</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label for="filterLokasi">Lokasi</label>
+              <select id="filterLokasi" class="filter-select">
+                <option value="">Semua Lokasi</option>
+                <option value="Lab 1">Lab 1</option>
+                <option value="Kantin">Kantin</option>
+                <option value="Perpustakaan">Perpustakaan</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label for="filterTanggal">Tanggal</label>
+              <input type="date" id="filterTanggal" class="filter-input">
+            </div>
+          </div>
+          <button class="btn-link" id="btnResetFilter">Atur ulang filter</button>
+        </div>
+        
+        <!-- Product cards grid -->
+        <div class="cards-grid" id="cardsGrid">
+          <!-- Card 1 -->
+          <article class="product-card" data-category="ditemukan" data-location="Lab 1">
+            <div class="card-image">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              </svg>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span class="category-tag">Barang Ditemukan</span>
+                <span class="status-badge status-amber">Disimpan Penemu</span>
+              </div>
+              <h3 class="card-title">Headset Hitam di Meja</h3>
+              <p class="card-location">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Lab 1
+              </p>
+              <p class="card-date">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                Hari ini
+              </p>
+              <button class="btn btn-primary btn-block">Lihat Detail →</button>
+            </div>
+          </article>
+          
+          <!-- Card 2 -->
+          <article class="product-card" data-category="ditemukan" data-location="Selasar">
+            <div class="card-image">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              </svg>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span class="category-tag">Barang Ditemukan</span>
+                <span class="status-badge status-blue">Dititipkan di Pos Satpam</span>
+              </div>
+              <h3 class="card-title">Kunci Motor Honda</h3>
+              <p class="card-location">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Selasar / Rumput
+              </p>
+              <p class="card-date">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                Kemarin
+              </p>
+              <button class="btn btn-primary btn-block">Lihat Detail →</button>
+            </div>
+          </article>
+          
+          <!-- Card 3 -->
+          <article class="product-card" data-category="hilang" data-location="Kantin">
+            <div class="card-image">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              </svg>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span class="category-tag">Barang Hilang</span>
+                <span class="status-badge status-red">Masih Dicari</span>
+              </div>
+              <h3 class="card-title">Dompet Cokelat</h3>
+              <p class="card-location">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Kantin
+              </p>
+              <p class="card-date">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                Hari ini
+              </p>
+              <button class="btn btn-primary btn-block">Lihat Detail →</button>
+            </div>
+          </article>
+        </div>
+        
+        <!-- Empty state (hidden by default) -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          </svg>
+          <h3>Tidak ada barang ditemukan</h3>
+          <p>Coba ubah filter atau buat laporan baru.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Komponen 4: Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="logo">
+              <div class="logo-badge">K</div>
+              <span class="logo-text">KetemuKampus</span>
+            </div>
+            <p>Portal Lost & Found Kampus untuk menemukan barang hilang dengan aman dan terpercaya.</p>
+          </div>
+          
+          <div class="footer-links">
+            <h4>Navigasi</h4>
+            <ul>
+              <li><a href="#beranda">Beranda</a></li>
+              <li><a href="#katalog">Katalog</a></li>
+              <li><a href="#cara-kerja">Cara Kerja</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-links">
+            <h4>Bantuan</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Kontak</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+              <li><a href="#">Syarat & Ketentuan</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-links">
+            <h4>Ikuti Kami</h4>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2026 KetemuKampus. Portal Lost & Found Kampus.</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="alert" aria-live="polite">
+    <span class="toast-message" id="toastMessage"></span>
+    <button class="toast-close" id="toastClose" aria-label="Tutup">&times;</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
